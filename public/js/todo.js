@@ -22,7 +22,7 @@ var ToDo = function () {
                 if ($('.actions').length > 0) {
                     $('.table').DataTable({
                         columns: [
-                            {orderable: false},
+                            null,
                             null,
                             null,
                             {orderable: false},
@@ -34,7 +34,7 @@ var ToDo = function () {
                 } else {
                     $('.table').DataTable({
                         columns: [
-                            {orderable: false},
+                            null,
                             null,
                             null,
                             {orderable: false},

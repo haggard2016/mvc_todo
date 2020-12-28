@@ -8,7 +8,6 @@ define('BASE_URL', 'http://localhost');
 
 session_name('User');
 session_start();
-//$_SESSION = array();
 define('PRIVATE_ID', session_id());
 session_write_close();
 

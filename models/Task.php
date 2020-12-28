@@ -6,7 +6,7 @@ class Task
 {
     public $id, $name, $email, $description, $created_at, $updated_at;
 
-    public function save()
+    public function create()
     {
         $sql = "INSERT INTO tasks (user_name, email, description, created_at, updated_at) 
                            VALUES (:user_name, :email, :description, :created_at, :updated_at)";
@@ -25,6 +25,11 @@ class Task
 
     public function update()
     {
+        $sql = "SELECT description, updated_at FROM tasks WHERE id = :id";
+        $getChangingTask = Db::getDbh()->prepare($sql);
+        $getChangingTask->execute(['id' => $this->id]);
+        $data = $getChangingTask->fetch();
+
         $sql = "UPDATE tasks SET user_name = :user_name, email = :email, description = :description , updated_at = :updated_at WHERE id = :id";
 
         $req = Db::getDbh()->prepare($sql);
@@ -34,7 +39,7 @@ class Task
             'user_name' => $this->name,
             'email' => $this->email,
             'description' => $this->description,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => ($data['description'] !== $this->description) ? date('Y-m-d H:i:s') : $data['updated_at']
         ]);
     }
 

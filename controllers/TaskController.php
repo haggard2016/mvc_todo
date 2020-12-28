@@ -21,7 +21,7 @@ class TaskController
             $task->email = $this->clearInputs($_POST['email']);
             $task->description = $this->clearInputs($_POST['description']);
             try {
-                $task->save();
+                $task->create();
             } catch (\PDOException $e) {
                 echo $e;
             }
